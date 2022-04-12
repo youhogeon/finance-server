@@ -11,12 +11,9 @@ public class Authentication {
     private int port;
 
     public static Authentication make(String host, int port, String db, String id, String pw) {
-        Authentication a = new Authentication();
-        a.setHost(host);
-        a.setPort(port);
+        Authentication a = make(host, port, pw);
         a.setDb(db);
         a.setId(id);
-        a.setPw(pw);
 
         return a;
     }

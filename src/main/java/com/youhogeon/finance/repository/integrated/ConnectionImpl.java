@@ -5,7 +5,7 @@ import com.youhogeon.finance.repository.Connection;
 
 public class ConnectionImpl implements Connection {
 
-    Connection rdbCon, cacheCon;
+    private Connection rdbCon, cacheCon;
 
     @Override
     public void connect(Authentication[] auth) throws Exception {

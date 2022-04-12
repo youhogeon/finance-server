@@ -8,9 +8,13 @@ import com.youhogeon.finance.repository.integrated.*;
 
 public class AppService {
 
+    Connection connection;
+    
     public AppService() {
         readEnv();
         connectDB();
+
+        closeDB();
     }
 
     public void run() {
@@ -36,14 +40,22 @@ public class AppService {
     }
 
     public void connectDB() {
-        Connection con = new ConnectionImpl();
+        connection = new ConnectionImpl();
 
         try{
             Authentication rdsAuth = Authentication.make(System.getProperty("mysql.host"), Integer.parseInt(System.getProperty("mysql.port")), System.getProperty("mysql.db"), System.getProperty("mysql.id"), System.getProperty("mysql.pw"));
             Authentication cacheAuth = Authentication.make(System.getProperty("redis.host"), Integer.parseInt(System.getProperty("redis.port")), System.getProperty("redis.pw"));
-            con.connect(new Authentication[]{rdsAuth, cacheAuth});
+            connection.connect(new Authentication[]{rdsAuth, cacheAuth});
         }catch(Exception e){
             System.out.println(e.toString());
+        }
+    }
+
+    private void closeDB() {
+        try{
+            connection.close();
+        }catch(Exception e){
+
         }
     }
 
