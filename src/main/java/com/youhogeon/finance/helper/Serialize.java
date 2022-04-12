@@ -23,6 +23,8 @@ public class Serialize {
     }
 
     public static Object unserialize(byte[] bytes) {
+        if (bytes == null) return null;
+
         ByteArrayInputStream bais = null;
         try {
             bais = new ByteArrayInputStream(bytes);
@@ -31,7 +33,7 @@ public class Serialize {
         } catch (Exception e) {
 
         }
-        
+
         return null;
     }
 }

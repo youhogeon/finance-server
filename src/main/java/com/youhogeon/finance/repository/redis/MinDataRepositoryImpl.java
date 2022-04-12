@@ -14,11 +14,11 @@ public class MinDataRepositoryImpl implements MinDataRepository {
 
     @Override
     public List<Chart> getDaily(String code, int date) {
-        byte[] obj = connection.get(makeKey(code, date));
+        Object obj = Serialize.unserialize(connection.get(makeKey(code, date)));
 
         if (obj == null) return null;
 
-        return (List<Chart>) Serialize.unserialize(obj);
+        return (List<Chart>) obj;
     }
 
     public void setDaily(String code, int date, List<Chart> obj) {

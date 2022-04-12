@@ -6,8 +6,8 @@ import com.youhogeon.finance.entity.Chart;
 import com.youhogeon.finance.repository.MinDataRepository;
 
 public class MinDataRepositoryImpl implements MinDataRepository {
-    com.youhogeon.finance.repository.redis.MinDataRepositoryImpl cacheRepo;
-    com.youhogeon.finance.repository.mysql.MinDataRepositoryImpl rdbRepo;
+    MinDataRepository cacheRepo;
+    MinDataRepository rdbRepo;
     
     public MinDataRepositoryImpl() {
         cacheRepo = new com.youhogeon.finance.repository.redis.MinDataRepositoryImpl();
