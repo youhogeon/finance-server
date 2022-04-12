@@ -13,6 +13,7 @@ public class MinDataRepositoryImpl implements MinDataRepository {
     private Jedis connection = ConnectionImpl.connection;
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Chart> getDaily(String code, int date) {
         Object obj = Serialize.unserialize(connection.get(makeKey(code, date)));
 

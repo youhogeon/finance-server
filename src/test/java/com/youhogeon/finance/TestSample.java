@@ -2,6 +2,7 @@ package com.youhogeon.finance;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.youhogeon.finance.repository.MinDataRepository;
 import com.youhogeon.finance.repository.integrated.MinDataRepositoryImpl;
 import com.youhogeon.finance.service.AppService;
 
@@ -26,17 +27,9 @@ public class TestSample {
     }
 
     @Test
-    public void RDB에서_1000회_가져오기() {
-        MinDataRepositoryImpl test = new MinDataRepositoryImpl();
-        for (int i = 0; i < 1000; i++){
-            test.getDailyWithoutCache("999001", 20220410);
-        }
-    }
-
-    @Test
-    public void REDIS에서_1000회_가져오기() {
-        MinDataRepositoryImpl test = new MinDataRepositoryImpl();
-        for (int i = 0; i < 1000; i++){
+    public void 데이터_가져오기() {
+        MinDataRepository test = new MinDataRepositoryImpl();
+        for (int i = 0; i < 2; i++){
             test.getDaily("999001", 20220410);
         }
     }

@@ -25,8 +25,4 @@ public class MinDataRepositoryImpl implements MinDataRepository {
 
         return result;
     }
-
-    public List<Chart> getDailyWithoutCache(String code, int date) {
-        return rdbRepo.getDaily(code, date);
-    }
 }
