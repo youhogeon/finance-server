@@ -1,7 +1,6 @@
 package com.youhogeon.finance;
 
 import static org.assertj.core.api.Assertions.*;
-
 import com.youhogeon.finance.repository.MinDataRepository;
 import com.youhogeon.finance.repository.integrated.MinDataRepositoryImpl;
 import com.youhogeon.finance.service.AppService;
@@ -9,8 +8,8 @@ import com.youhogeon.finance.service.AppService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestSample {
-    
+public class SimpleDBTest {
+
     @Test
     public void simpleTest(){
         assertThat("Hello, World!")
@@ -21,9 +20,8 @@ public class TestSample {
     }
 
     @BeforeClass
-    public static void 초기화() {
-        AppService appService = new AppService();
-        appService.run();
+    public static void 초기화() throws Exception {
+        new AppService();
     }
 
     @Test

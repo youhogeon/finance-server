@@ -5,20 +5,26 @@ import java.io.FileReader;
 
 import com.youhogeon.finance.repository.*;
 import com.youhogeon.finance.repository.integrated.*;
+import com.youhogeon.finance.service.server.*;
+import com.youhogeon.finance.service.server.tcp.*;
 
 public class AppService {
 
     Connection connection;
+    Server s;
     
     public AppService() {
         readEnv();
         connectDB();
-
-        closeDB();
     }
 
     public void run() {
-        
+        runServer();
+    }
+
+    public void close() {
+        closeDB();
+        closeServer();
     }
 
     public void readEnv() {
@@ -57,6 +63,15 @@ public class AppService {
         }catch(Exception e){
 
         }
+    }
+
+    private void runServer() {
+        s = new ServerImpl();
+        s.bind(Integer.parseInt(System.getProperty("server.port")));
+    }
+
+    private void closeServer() {
+        s.close();
     }
 
 }

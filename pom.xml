@@ -5,7 +5,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   <artifactId>server</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
-  <name>udpclient</name>
+  <name>Finance API Server</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -69,5 +69,5 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
         </configuration>
       </plugin>
     </plugins>
-    </build>
+  </build>
 </project>

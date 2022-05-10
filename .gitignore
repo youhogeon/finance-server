@@ -4,5 +4,8 @@ target/
 !**/src/test/**/target/
 .env
 
+.apt_generated
+.apt_generated_tests
+
 ### VS Code ###
 .vscode/
