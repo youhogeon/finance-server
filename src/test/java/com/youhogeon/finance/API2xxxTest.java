@@ -3,8 +3,6 @@ package com.youhogeon.finance;
 import static org.assertj.core.api.Assertions.*;
 
 import com.youhogeon.finance.helper.Buffer;
-import com.youhogeon.finance.repository.MinDataRepository;
-import com.youhogeon.finance.repository.integrated.MinDataRepositoryImpl;
 import com.youhogeon.finance.service.AppService;
 import com.youhogeon.finance.service.StockService;
 
