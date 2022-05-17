@@ -22,7 +22,8 @@ public class RobotRepositoryImpl implements RobotRepository {
         if (result != null) return result;
 
         result = rdbRepo.getRobot(robotID);
-        cacheRepo.setRobot(result);
+        if (result != null) cacheRepo.setRobot(result);
+        else cacheRepo.setRobot(robotID);
 
         return result;
     }

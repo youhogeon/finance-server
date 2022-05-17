@@ -23,13 +23,13 @@ public class RobotRepositoryImpl implements RobotRepository {
         return (Robot) obj;
     }
 
+    public void setRobot(String auth) {
+        connection.del(makeKeyRobot(auth));
+    }
+
     @Override
     public void setRobot(Robot robot) {
         connection.set(makeKeyRobot(robot.getAuth()), Serialize.serialize(robot));
-    }
-
-    public void setRobot(String auth) {
-        connection.del(makeKeyRobot(auth));
     }
 
     private byte[] makeKeyRobot(String auth) {

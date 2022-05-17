@@ -24,7 +24,7 @@ public class SocketTest {
             appService.run();
         }).start();
 
-        Thread.sleep(100);
+        Thread.sleep(1000);
     }
 
     @Before
@@ -62,16 +62,20 @@ public class SocketTest {
         is.close();
         //SEND PING REQUEST
 
-        assertThat(b.getInt(8))
-            .isGreaterThanOrEqualTo(time);
-        //응답 본문(=시간) 확인
-
-        assertThat(b.getShort(4))
+        /*assertThat(b.getShort(4))
             .isEqualTo(4);
         //응답 헤더의 length값 확인
+        assertThat(b.getInt(8))
+        .isGreaterThanOrEqualTo(time);
+        //응답 본문(=시간) 확인*/
 
         assertThat(b.getShort(2))
-            .isEqualTo(RID);
+        .isEqualTo(RID);
         //응답 헤더의 RID값 확인
+
+        assertThat(b.getByte(1))
+        .isEqualTo((byte)141);
+        //응답 헤더의 RID값 확인
+
     }
 }

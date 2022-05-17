@@ -78,6 +78,8 @@ public class RequestController implements Runnable {
             res.setCode(200);
             resCont.send();
         } catch (Exception e){
+            e.printStackTrace();
+
             int code = 150;
             if (e.getMessage().length() == 3) code = Integer.parseInt(e.getMessage());
 
