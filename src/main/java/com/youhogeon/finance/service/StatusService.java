@@ -13,6 +13,6 @@ public class StatusService {
 
     public static boolean marketOpen() {
         //SELECT COUNT(*) FROM min_datas WHERE `date` = '2022-04-26' AND `code`='999001' AND `time` < 1001;
-        return false;
+        return true;
     }
 }

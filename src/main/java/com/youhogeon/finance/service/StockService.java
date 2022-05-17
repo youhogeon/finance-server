@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.youhogeon.finance.entity.Chart;
 import com.youhogeon.finance.helper.Buffer;
 import com.youhogeon.finance.repository.MinDataRepository;
 import com.youhogeon.finance.repository.integrated.MinDataRepositoryImpl;
 
 public class StockService {
 
-    public static byte[] available(byte[] body) {
+    public static byte[] available(Buffer req) {
         MinDataRepository minRepo = new MinDataRepositoryImpl();
         List<String> allDatas = minRepo.getAvailableCode();
         List<String> results;
-        Buffer req = new Buffer(body);
 
         int cnt = req.getSize() / 6;
 
@@ -41,12 +41,11 @@ public class StockService {
         return buf.getBuffer();
     }
 
-    public static byte[] currentPrice(byte[] body) {
+    public static byte[] currentPrice(Buffer req) {
         MinDataRepository minRepo = new MinDataRepositoryImpl();
         List<String> allDatas = minRepo.getAvailableCode();
         Map<String, Integer> currentPrice = minRepo.getCurrentPrice();
         List<String> codes;
-        Buffer req = new Buffer(body);
 
         int cnt = req.getSize() / 6;
 
@@ -69,6 +68,29 @@ public class StockService {
         }
 
         return buf.getBuffer();
+    }
+
+    public static byte[] stockData(Buffer req) {
+        MinDataRepository minRepo = new MinDataRepositoryImpl();
+        String code = req.getString(1, 6);
+        int date = req.getInt(7);
+
+        List<Chart> query = minRepo.getDaily(code, date);
+        Buffer result = new Buffer(query.size() * 26);
+
+        int idx = 0;
+        for (Chart c : query) {
+            result.add(idx, c.getDate());
+            result.add(idx + 4, (short)c.getTime());
+            result.add(idx + 6, c.getOpen());
+            result.add(idx + 10, c.getHigh());
+            result.add(idx + 14, c.getLow());
+            result.add(idx + 18, c.getClose());
+            result.add(idx + 22, c.getVolume());
+            idx += 26;
+        }
+
+        return result.getBuffer();
     }
     
 }

@@ -18,7 +18,7 @@ public class API2xxxTest {
 
     @Test
     public void API2000_전체종목코드() {
-        byte[] b = StockService.available(new byte[0]);
+        byte[] b = StockService.available(new Buffer(0));
 
         assertThat(b.length)
             .isGreaterThan(0);
@@ -31,7 +31,7 @@ public class API2xxxTest {
     public void API2000_부분종목코드() {
         byte[] req = "005930999001111111069500".getBytes();
 
-        byte[] b = StockService.available(req);
+        byte[] b = StockService.available(new Buffer(req));
 
         assertThat(new String(b))
             .matches("(999001069500|069500999001)");
@@ -39,7 +39,7 @@ public class API2xxxTest {
 
     @Test
     public void API2000_전종목현재가() {
-        byte[] b = StockService.currentPrice(new byte[0]);
+        byte[] b = StockService.currentPrice(new Buffer(0));
 
         assertThat(b.length)
             .isGreaterThan(0);
@@ -51,7 +51,7 @@ public class API2xxxTest {
     @Test
     public void API2000_지수현재가() {
         byte[] req = "999001111111999002".getBytes();
-        byte[] b = StockService.currentPrice(req);
+        byte[] b = StockService.currentPrice(new Buffer(req));
 
         Buffer buf = new Buffer(b);
 
@@ -65,7 +65,7 @@ public class API2xxxTest {
             .isEqualTo(0);
 
         req = "999002999001".getBytes();
-        b = StockService.currentPrice(req);
+        b = StockService.currentPrice(new Buffer(req));
 
         buf = new Buffer(b);
 

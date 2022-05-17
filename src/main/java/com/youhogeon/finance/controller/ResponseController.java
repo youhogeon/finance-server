@@ -3,7 +3,7 @@ package com.youhogeon.finance.controller;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import com.youhogeon.protocol.Response;
+import com.youhogeon.finance.protocol.Response;
 
 public class ResponseController {
 

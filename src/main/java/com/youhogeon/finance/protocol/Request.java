@@ -1,4 +1,4 @@
-package com.youhogeon.protocol;
+package com.youhogeon.finance.protocol;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -6,8 +6,8 @@ import java.util.Arrays;
 import com.youhogeon.finance.helper.Buffer;
 
 public class Request {
-    byte[] header_raw, body;
-    Buffer header;
+    byte[] header_raw, body_raw;
+    Buffer header, body;
 
     public Request(InputStream is) throws Exception {
         header_raw = new byte[30];
@@ -16,10 +16,11 @@ public class Request {
         header = new Buffer(header_raw);
 
         int len = getLength();
-        body = new byte[len + 30];
-        if (is.read(body, 30, len) != len) throw new Exception();
+        body_raw = new byte[len + 30];
+        if (is.read(body_raw, 30, len) != len) throw new Exception();
 
-        body = Arrays.copyOfRange(body, 30, len + 30);
+        body_raw = Arrays.copyOfRange(body_raw, 30, len + 30);
+        body = new Buffer(body_raw);
     }
 
     public int getProtocolVersion() {
@@ -35,7 +36,11 @@ public class Request {
     }
 
     public String getAuth() {
-        return header.getString(4, 20);
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 4; i < 24; i++) result.append(String.format("%02x", header_raw[i]));
+
+        return result.toString();
     }
 
     public int getRID() {
@@ -46,7 +51,7 @@ public class Request {
         return (int) header.getShort(26);
     }
 
-    public byte[] getBody() {
+    public Buffer getBody() {
         return body;
     }
 }

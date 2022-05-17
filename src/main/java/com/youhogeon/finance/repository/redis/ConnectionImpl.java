@@ -14,6 +14,8 @@ public class ConnectionImpl implements Connection {
     public void connect(Authentication[] auth) throws Exception {
         pool = new JedisPool(auth[0].getHost(), auth[0].getPort());
         connection = pool.getResource();
+
+        connection.flushAll();
     }
 
     @Override

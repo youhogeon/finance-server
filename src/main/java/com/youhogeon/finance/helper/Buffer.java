@@ -39,11 +39,38 @@ public class Buffer{
         this.buf[idx] = (byte) (i);
     }
 
+    public void add(int idx, long i){
+        this.buf[idx + 7] = (byte) (i >> 56);
+        this.buf[idx + 6] = (byte) (i >> 48);
+        this.buf[idx + 5] = (byte) (i >> 40);
+        this.buf[idx + 4] = (byte) (i >> 32);
+        this.buf[idx + 3] = (byte) (i >> 24);
+        this.buf[idx + 2] = (byte) (i >> 16);
+        this.buf[idx + 1] = (byte) (i >> 8);
+        this.buf[idx] = (byte) (i);
+    }
+
     public void add(int idx, String s){
         byte[] b = s.getBytes();
         int size = b.length;
 
         for (int i = 0; i < size; i++) this.buf[i + idx] = b[i];
+    }
+
+    public void addHex(int idx, String hex) {
+        int size = hex.length();
+        if (size % 2 == 1) {
+            size++;
+            hex = "0" + hex;
+        }
+
+        for (int i = 0; i < size; i += 2) {
+            try {
+                this.buf[idx++] = (byte) Integer.parseInt(hex.substring(i, i + 2), 16);
+            } catch (Exception e) {
+
+            }
+        }
     }
 
     public String toHex() {
@@ -79,6 +106,12 @@ public class Buffer{
 
     public int getInt(int idx){
         int s = (int) ((buf[idx + 3] & 255) << 24 | (buf[idx + 2] & 255) << 16 | (buf[idx + 1] & 255) << 8 | (buf[idx] & 255));
+
+        return s;
+    }
+
+    public long getLong(int idx){
+        long s = (long) ((buf[idx + 7] & 255) << 56 | (buf[idx + 6] & 255) << 48 | (buf[idx + 5] & 255) << 40 | (buf[idx + 4] & 255) << 32 | (buf[idx + 3] & 255) << 24 | (buf[idx + 2] & 255) << 16 | (buf[idx + 1] & 255) << 8 | (buf[idx] & 255));
 
         return s;
     }

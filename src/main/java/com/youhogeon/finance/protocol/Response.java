@@ -1,4 +1,4 @@
-package com.youhogeon.protocol;
+package com.youhogeon.finance.protocol;
 
 import java.io.OutputStream;
 
